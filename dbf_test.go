@@ -102,7 +102,7 @@ func TestDBF_Read(t *testing.T) {
 	//}
 	//fmt.Printf("DBFHandler Record: %+v\n", r)
 
-	rs := make([]DBFRecord, dbf.header.NumRecords-474)
+	rs := make([]DBFRecord, dbf.NumRecords()-474)
 	err = dbf.GetRecords(474, dbf.header.NumRecords, &rs, 1)
 	if err != nil {
 		t.Fatalf("read failed %v", err)
