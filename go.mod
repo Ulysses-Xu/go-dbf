@@ -1,4 +1,4 @@
-module go-dbf
+module github.com/Ulysses-Xu/go-dbf
 
 go 1.23
 
