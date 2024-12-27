@@ -1,4 +1,4 @@
-package dbf
+package godbf
 
 // DBFHeader represents the structure of the DBFHandler file header.
 type DBFHeader struct {

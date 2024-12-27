@@ -1,4 +1,4 @@
-package dbf
+package godbf
 
 import (
 	"bytes"
