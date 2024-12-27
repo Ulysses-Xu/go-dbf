@@ -77,6 +77,7 @@ func main() {
         t.Fatalf("init failed %v", err)
     }
     r := DBFRecord{}
+    // 读取第一条数据
     err = dbf.GetRecord(0, &r)
     if err != nil {
     	t.Fatalf("read failed %v", err)
@@ -94,7 +95,7 @@ func main() {
     if err != nil {
         t.Fatalf("init failed %v", err)
     }
-	// 从474开始读到末尾
+    // 从474开始读到末尾
     rs := make([]DBFRecord, dbf.header.NumRecords-474)
     err = dbf.GetRecords(474, dbf.header.NumRecords, &rs, 1)
     if err != nil {
