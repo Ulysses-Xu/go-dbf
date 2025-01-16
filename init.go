@@ -69,6 +69,12 @@ func (dbf *DBFHandler) initModel(model interface{}) error {
 		dbfColumn := field.Tag.Get("dbf")
 		modelColumnIndex[dbfColumn] = i
 	}
+	for i := 0; i < len(dbf.columns); i++ {
+		_, exists := modelColumnIndex[dbf.columns[i]]
+		if !exists {
+			return fmt.Errorf("column %s does not exist in model", dbf.columns[i])
+		}
+	}
 	dbf.modelColumnIndex = modelColumnIndex
 	return nil
 }
