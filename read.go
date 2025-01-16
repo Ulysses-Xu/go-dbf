@@ -30,14 +30,14 @@ func (dbf *DBFHandler) getRecord(index uint32, rv reflect.Value) error {
 		fieldIndex := dbf.modelColumnIndex[dbf.columns[i]]
 		fieldValue := rv.Field(fieldIndex)
 		columnLength := int(dbf.fields[fieldIndex].Length)
-		columnVal := strings.TrimSpace(string(data[pos : pos+columnLength]))
+		columnVal := strings.TrimSpace(dbf.decoder.ConvertString(string(data[pos : pos+columnLength])))
 		if columnVal == "" {
 			pos += columnLength
 			continue
 		}
 		switch fieldValue.Kind() {
 		case reflect.String:
-			fieldValue.SetString(dbf.decoder.ConvertString(columnVal))
+			fieldValue.SetString(columnVal)
 		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 			num, err := strconv.ParseInt(columnVal, 10, 64)
 			if err != nil {
