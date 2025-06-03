@@ -27,7 +27,10 @@ func (dbf *DBFHandler) getRecord(index uint32, rv reflect.Value) error {
 
 	pos := 0
 	for i := 0; i < len(dbf.columns); i++ {
-		fieldIndex := dbf.modelColumnIndex[dbf.columns[i]]
+		fieldIndex, exist := dbf.modelColumnIndex[dbf.columns[i]]
+		if !exist {
+			return errors.New(fmt.Sprintf("column not found %s", dbf.columns[i]))
+		}
 		fieldValue := rv.Field(fieldIndex)
 		columnLength := int(dbf.fields[fieldIndex].Length)
 		columnVal := strings.TrimSpace(dbf.decoder.ConvertString(string(data[pos : pos+columnLength])))
